@@ -153,7 +153,8 @@ namespace MusicAppForms
             public MusicAppContext() : base("name = ConnectString")
             {
                 //Database.SetInitializer(new CreateDatabaseIfNotExists<NotitieboekjeContext>());
-                Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MusicAppContext>());
+                System.Data.Entity.Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MusicAppContext>());
+               
             }
 
             public DbSet<User> User { get; set; }

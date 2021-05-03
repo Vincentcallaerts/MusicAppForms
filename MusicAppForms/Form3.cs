@@ -13,56 +13,37 @@ using System.Windows.Forms;
 
 namespace MusicAppForms
 {
-    public partial class Form1 : Form
+    public partial class Form3 : Form
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
-
-        public Form1()
+        public Form3()
         {
             InitializeComponent();
-           
+            UpdateInfo();
         }
 
-        private void btnLogIn_Click(object sender, EventArgs e)
+        private void btnLogOut_Click(object sender, EventArgs e)
         {
-            Email = tbEmail.Text;
-            Password = tbPassword.Text;
-            User loginAtempt;
+
+            this.Close();
+        }
+        private void btnAddArtist_Click(object sender, EventArgs e)
+        {
             using (MusicAppContext data = new MusicAppContext())
             {
-                loginAtempt = data.User.Where(u => u.Email == Email && u.Password == Password).FirstOrDefault();
+                data.Artist.Add(new Artist() { Name = tbArtistName.Text, CreatedAt = new DateTime().ToString("dd/MM/yyyy"), UpdatedAt = new DateTime().ToString("dd/MM/yyyy") });
+                data.SaveChanges();
+                UpdateInfo();
 
             }
-            if (loginAtempt != null)
-            {
-                Program.OpenDetailFormOnClose = true;
-
-                this.Close();
-            }
-            
         }
-        private void btnSignUp_Click(object sender, EventArgs e)
+        private void UpdateInfo()
         {
-            using (Form2 form2 = new Form2())
+            using (MusicAppContext data = new MusicAppContext())
             {
 
-                switch (form2.ShowDialog())
-                {
-                    case DialogResult.OK:
-
-                        using (MusicAppContext data = new MusicAppContext())
-                        {
-                            data.User.Add(new User() { FirstName = form2.FirstName, LastName = form2.LastName, Email = form2.Email, Password = form2.Password });
-                            data.SaveChanges();
-
-                        }
-
-                        break;
-                }
+                listBox1.Items.AddRange(data.Artist.Select(c => c.Name).ToArray());
             }
         }
-
         public class User
         {
             public int UserId { get; set; }
@@ -152,7 +133,6 @@ namespace MusicAppForms
         {
             public MusicAppContext() : base("name = ConnectString")
             {
-                //Database.SetInitializer(new CreateDatabaseIfNotExists<NotitieboekjeContext>());
                 Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MusicAppContext>());
             }
 
@@ -164,5 +144,7 @@ namespace MusicAppForms
             public DbSet<Interactions> Interactions { get; set; }
 
         }
+
+        
     }
 }

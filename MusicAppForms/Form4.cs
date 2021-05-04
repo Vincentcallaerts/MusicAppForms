@@ -11,22 +11,34 @@ using static MusicAppForms.Form1;
 
 namespace MusicAppForms
 {
+    public class TestClass
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public TestClass()
+        {
+        }
+    }
+
     public partial class Form4 : Form
     {
-        User loggedIn;
+        public User LoggedIn { get; set; }
+
+
         public Form4(User user)
         {
-            loggedIn = user;
+            LoggedIn = user;
 
             InitializeComponent();
-            
+
             using (MusicAppContext data = new MusicAppContext())
             {
-                cbPlaylistSelect.DataSource = data.Playlists.Where(c => c.UserId == loggedIn.UserId).Select(c => new { Id = c.PlaylistId, PlaylistNaam = c.Name }).ToArray();
+                cbPlaylistSelect.DataSource = data.Playlists.Where(c => c.UserId == LoggedIn.UserId).Select(c => new TestClass { Id = c.PlaylistId, Name = c.Name }).ToArray();
                 cbPlaylistSelect.DisplayMember = "PlaylistNaam";
                 cbPlaylistSelect.ValueMember = "Id";
             }
-            
+
             UpdateForm();
 
         }
@@ -34,10 +46,12 @@ namespace MusicAppForms
         {
             using (MusicAppContext data = new MusicAppContext())
             {
+                cbSongInPlaylistSelect.DataSource = null;
+                listBox1.DataSource = null;
 
-                int selectedPlaylist = Convert.ToInt32(cbPlaylistSelect.SelectedValue.ToString());
-
-                var collection = data.PlaylistSongs.Join(data.Song, p => p.SongId, s => s.SongId, (p, s) => new { SongId = s.SongId, SongName = s.Title }).ToArray();
+                TestClass a = cbPlaylistSelect.SelectedItem as TestClass;
+                int vari = a.Id;
+                var collection = data.PlaylistSongs.Where(p => p.PlaylistId == vari).Join(data.Song, p => p.SongId, s => s.SongId, (p, s) => new { SongId = s.SongId, SongName = s.Title }).ToArray();
 
                 cbSongInPlaylistSelect.DataSource = collection;
                 cbSongInPlaylistSelect.DisplayMember = "SongName";
@@ -52,7 +66,7 @@ namespace MusicAppForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void cbPlaylistSelect_SelectedIndexChanged(object sender, EventArgs e)

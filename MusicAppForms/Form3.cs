@@ -26,7 +26,7 @@ namespace MusicAppForms
         {
             InitializeComponent();
             LoggedIn = loggedin;
-            lbUser.Text = LoggedIn.Email;
+            lbUser.Text = "User: " + LoggedIn.Email;
             UpdateInfo();
         }
         private void UpdateInfo()
@@ -35,15 +35,19 @@ namespace MusicAppForms
             {
                 listBox1.Items.Clear();
                 listBox1.Items.AddRange(data.Artist.Select(c => c.Name).ToArray());
+
                 listBox2.Items.Clear();
                 listBox2.Items.AddRange(data.Song.Select(c => new { Info = c.Title + " " + c.Album.Artist.Name }).ToArray());
-                cbArtisten.DataSource = data.Artist.Select(c => new { Id = c.ArtistId, NaamArtist = c.Name }).ToArray(); ; 
 
-                
+                listBox3.Items.Clear();
+                listBox3.Items.AddRange(data.Interactions.Where(c => c.UserId == LoggedIn.UserId).Select(c => new { Info = c.Song.Title + " Liked: " + c.Liked + " PlayCount: " + c.PlayCount }).ToArray());
+
+                cbArtisten.DataSource = data.Artist.Select(c => new { Id = c.ArtistId, NaamArtist = c.Name }).ToArray(); ; 
+           
                 cbArtisten.DisplayMember = "NaamArtist";
                 cbArtisten.ValueMember = "Id";
 
-                cbPlaylistPlaylist.DataSource = data.Playlists.Select(c => new { Id = c.PlaylistId, NamePlaylist = c.Name }).ToArray();
+                cbPlaylistPlaylist.DataSource = data.Playlists.Where(c => c.UserId == LoggedIn.UserId).Select(c => new { Id = c.PlaylistId, NamePlaylist = c.Name }).ToArray();
 
                 cbPlaylistPlaylist.DisplayMember = "NamePlaylist";
                 cbPlaylistPlaylist.ValueMember = "Id";
@@ -55,6 +59,7 @@ namespace MusicAppForms
                 cbAlbums.DataSource = data.Album.Select(c => new { Id = c.AlbumId, NameAlbum = c.Title }).ToArray();
                 cbAlbums.DisplayMember = "NameAlbum";
                 cbAlbums.ValueMember = "Id";
+
             }
         }
 
@@ -130,13 +135,7 @@ namespace MusicAppForms
                 switch (form4.ShowDialog())
                 {
                     case DialogResult.OK:
-
-                        using (MusicAppContext data = new MusicAppContext())
-                        {
-                            
-
-                        }
-
+                        UpdateInfo();
                         break;
                 }
             }

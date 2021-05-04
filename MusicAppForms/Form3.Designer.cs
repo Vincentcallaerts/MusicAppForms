@@ -51,10 +51,6 @@ namespace MusicAppForms
             this.label7 = new System.Windows.Forms.Label();
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.cbSongs = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.btnLike = new System.Windows.Forms.Button();
-            this.btnPlay = new System.Windows.Forms.Button();
             this.lbUser = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.tbPlaylist = new System.Windows.Forms.TextBox();
@@ -257,41 +253,6 @@ namespace MusicAppForms
             this.label8.TabIndex = 27;
             this.label8.Text = "Interactions";
             // 
-            // cbSongs
-            // 
-            this.cbSongs.FormattingEnabled = true;
-            this.cbSongs.Location = new System.Drawing.Point(244, 194);
-            this.cbSongs.Name = "cbSongs";
-            this.cbSongs.Size = new System.Drawing.Size(121, 21);
-            this.cbSongs.TabIndex = 29;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(244, 179);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(32, 13);
-            this.label9.TabIndex = 28;
-            this.label9.Text = "Song";
-            // 
-            // btnLike
-            // 
-            this.btnLike.Location = new System.Drawing.Point(371, 194);
-            this.btnLike.Name = "btnLike";
-            this.btnLike.Size = new System.Drawing.Size(75, 23);
-            this.btnLike.TabIndex = 30;
-            this.btnLike.Text = "Like";
-            this.btnLike.UseVisualStyleBackColor = true;
-            // 
-            // btnPlay
-            // 
-            this.btnPlay.Location = new System.Drawing.Point(371, 217);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(75, 23);
-            this.btnPlay.TabIndex = 31;
-            this.btnPlay.Text = "Play";
-            this.btnPlay.UseVisualStyleBackColor = true;
-            // 
             // lbUser
             // 
             this.lbUser.AutoSize = true;
@@ -372,9 +333,9 @@ namespace MusicAppForms
             // 
             // btnPlaylistInhoud
             // 
-            this.btnPlaylistInhoud.Location = new System.Drawing.Point(462, 192);
+            this.btnPlaylistInhoud.Location = new System.Drawing.Point(238, 180);
             this.btnPlaylistInhoud.Name = "btnPlaylistInhoud";
-            this.btnPlaylistInhoud.Size = new System.Drawing.Size(75, 107);
+            this.btnPlaylistInhoud.Size = new System.Drawing.Size(299, 60);
             this.btnPlaylistInhoud.TabIndex = 41;
             this.btnPlaylistInhoud.Text = "Check Songs In Playlist";
             this.btnPlaylistInhoud.UseVisualStyleBackColor = true;
@@ -395,10 +356,6 @@ namespace MusicAppForms
             this.Controls.Add(this.tbPlaylist);
             this.Controls.Add(this.btnAddPlaylist);
             this.Controls.Add(this.lbUser);
-            this.Controls.Add(this.btnPlay);
-            this.Controls.Add(this.btnLike);
-            this.Controls.Add(this.cbSongs);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.listBox3);
             this.Controls.Add(this.label7);
@@ -454,10 +411,6 @@ namespace MusicAppForms
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListBox listBox3;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cbSongs;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnLike;
-        private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Label lbUser;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tbPlaylist;

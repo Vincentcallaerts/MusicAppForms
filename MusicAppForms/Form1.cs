@@ -15,6 +15,7 @@ namespace MusicAppForms
 {
     public partial class Form1 : Form
     {
+        public User loginAtempt { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
 
@@ -28,7 +29,7 @@ namespace MusicAppForms
         {
             Email = tbEmail.Text;
             Password = tbPassword.Text;
-            User loginAtempt;
+            
             using (MusicAppContext data = new MusicAppContext())
             {
                 loginAtempt = data.User.Where(u => u.Email == Email && u.Password == Password).FirstOrDefault();
@@ -36,9 +37,17 @@ namespace MusicAppForms
             }
             if (loginAtempt != null)
             {
+
                 Program.OpenDetailFormOnClose = true;
 
-                this.Close();
+                using (Form3 form3 = new Form3(loginAtempt))
+                {
+
+                    form3.ShowDialog();
+
+                }
+                
+                
             }
             
         }
@@ -84,7 +93,7 @@ namespace MusicAppForms
             public int SongId { get; set; }
             public Song Song { get; set; }
 
-            public int Liked { get; set; }
+            public bool Liked { get; set; }
             public int PlayCount { get; set; }
             public string CreatedAt { get; set; }
             public string UpdatedAt { get; set; }
@@ -161,6 +170,7 @@ namespace MusicAppForms
             public DbSet<Album> Album { get; set; }
             public DbSet<Artist> Artist { get; set; }
             public DbSet<Song> Song { get; set; }
+            public DbSet<Playlist> Playlists { get; set; }
             public DbSet<PlaylistSongs> PlaylistSongs { get; set; }
             public DbSet<Interactions> Interactions { get; set; }
 

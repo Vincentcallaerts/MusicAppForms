@@ -12,6 +12,7 @@ namespace MusicAppForms
     static class Program
     {
         public static bool OpenDetailFormOnClose { get; set; }
+        
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -22,10 +23,7 @@ namespace MusicAppForms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            if (OpenDetailFormOnClose)
-            {
-                Application.Run(new Form3());
-            }
+          
         }
         
     }
